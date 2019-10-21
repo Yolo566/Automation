@@ -20,8 +20,8 @@ public class OneTM {
 		d.navigate().to("http://153.88.35.162:8080/arsys/shared/login.jsp?/arsys/home");
 		d.manage().window().maximize();
 		
-		d.findElement(By.xpath("//*[@id=\"username-id\"]")).sendKeys("eqrruvd");
-		d.findElement(By.xpath("//*[@id=\"pwd-id\"]")).sendKeys("Jaimahavir146@");
+		d.findElement(By.xpath("//*[@id=\"username-id\"]")).sendKeys("somehting");
+		d.findElement(By.xpath("//*[@id=\"pwd-id\"]")).sendKeys("something123");
 		
 		d.findElement(By.xpath("/html/body/table/tbody/tr[1]/td/table[2]/tbody/tr/td[2]/table/tbody/tr[5]/td[3]/input[1]")).click();
 		
