@@ -1,0 +1,135 @@
+package datadriven;
+
+import java.io.File;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Set;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.BeforeClass;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class ITSMtestCase {
+	
+	
+	public static void main(String[] args) throws InterruptedException{
+		
+	System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\Driver\\chromedriver v78\\chromedriver.exe");
+	WebDriver d = new ChromeDriver();
+	d.navigate().to("https://nextgentm.sdt.ericsson.net/arsys");
+	d.manage().window().maximize();
+		
+		d.findElement(By.xpath("//*[@id='login']")).sendKeys("eqrruvd");
+		d.findElement(By.xpath("//*[@id='passwd']")).click();
+		d.findElement(By.xpath("//*[@id='passwd']")).clear();
+		d.findElement(By.xpath("//*[@id='passwd']")).sendKeys("Eric@12345");
+		
+		
+		
+		
+
+	
+		Select s = new Select(d.findElement(By.xpath("//*[@id='domain']")));  //handling dropdown
+		s.selectByVisibleText("Employee/ARP");
+	
+		d.findElement(By.xpath("//*[@id='loginBtn']")).click();
+	
+		Thread.sleep(3000);
+		
+		//d.switchTo().alert().accept();   //pop-up handling
+		
+		
+		
+		d.findElement(By.xpath("//*[@id='reg_img_304316340']")).click();
+
+		
+		//hover handling
+
+		Actions action = new Actions(d);
+
+		 
+		WebElement ele =d.findElement(By.xpath("/html/body/div[1]/div[5]/div[5]/div/div[18]/a"));
+	  
+		
+		action.moveToElement(ele).perform();	
+		
+		d.findElement(By.xpath("/html/body/div[1]/div[5]/div[5]/div/div[18]/div/div/a/span")).click();
+	
+		
+		
+		
+	  Set<String> handles = d.getWindowHandles();  //tab handling
+	    String currentHandle = d.getWindowHandle();
+	    for (String handle : handles) {
+
+	     if (!handle .equals(currentHandle))
+	     {
+	         d.switchTo().window(handle);
+	     }
+			d.findElement(By.xpath("/html/body/form/div[2]/div[4]/div/div/div[1]/div")).click();
+			d.findElement(By.xpath("/html/body/form/div[2]/div[4]/div/div/div[2]/div/div[2]/div[4]/div/div[1]")).click();
+			d.findElement(By.xpath("/html/body/form/div[2]/div[4]/div/div/div[2]/div/div[2]/div[4]/div/div[3]/div[2]/div[1]/div")).click();
+			d.findElement(By.xpath("/html/body/form/div[12]/div/div[2]/div[4]/div/div[2]/div[3]/div/div[1]/div/div[2]")).click();
+			d.findElement(By.xpath("/html/body/form/div[12]/div/div[2]/div[4]/div/div[2]/div[3]/div/div[2]/div/div/div/div/div[2]")).click();
+
+			WebElement elementLocator = d.findElement(By.xpath("/html/body/form/div[12]/div/div[3]/div/div/div/div[2]/div/div[1]"));
+			action.doubleClick(elementLocator).perform();
+			
+			Thread.sleep(5000);
+			
+			
+			
+	   }
+	  
+	}
+	
+	
+	public void  main() throws IOException, InterruptedException {
+		
+		System.setProperty("webdriver.chrome.driver", "C:\\Selenium\\Driver\\chromedriver_win32\\chromedriver.exe");
+		
+		File f= new File("C:\\Users\\eqrruvd\\Desktop\\TestCase.xlsx"); 
+		FileInputStream fis= new FileInputStream(f);
+		
+		XSSFWorkbook wb = new XSSFWorkbook(fis);
+		Sheet sht= wb.getSheetAt(0);
+		
+		int s = sht.getLastRowNum();
+		
+		for (int i = 1; i <= s; i++) {
+			WebDriver d = new ChromeDriver();
+			d.navigate().to("https://nextgentm.sdt.ericsson.net/arsys");
+			d.manage().window().maximize();
+			
+			Cell cell = sht.getRow(i).getCell(0);
+			cell.setCellType(Cell.CELL_TYPE_STRING);
+			d.findElement(By.xpath("//*[@id=\"identifierId\"]")).sendKeys(cell.getStringCellValue());
+			d.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/div/div/div[2]/div/div[2]/div/div[1]/div/span/span")).click();
+			
+			Thread.sleep(5000);
+			
+			cell = sht.getRow(i).getCell(1);
+			cell.setCellType(Cell.CELL_TYPE_STRING);
+			d.findElement(By.xpath("//*[@id=\"password\"]/div[1]/div/div[1]/input")).sendKeys(cell.getStringCellValue());
+			d.findElement(By.xpath("//*[@id=\"passwordNext\"]/span/span")).click();
+			
+			d.close();
+	
+		}
+	
+	}
+
+}
