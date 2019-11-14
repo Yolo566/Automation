@@ -32,10 +32,10 @@ public class ITSMtestCase {
 	d.navigate().to("https://nextgentm.sdt.ericsson.net/arsys");
 	d.manage().window().maximize();
 		
-		d.findElement(By.xpath("//*[@id='login']")).sendKeys("eqrruvd");
+		d.findElement(By.xpath("//*[@id='login']")).sendKeys("username");
 		d.findElement(By.xpath("//*[@id='passwd']")).click();
 		d.findElement(By.xpath("//*[@id='passwd']")).clear();
-		d.findElement(By.xpath("//*[@id='passwd']")).sendKeys("Eric@12345");
+		d.findElement(By.xpath("//*[@id='passwd']")).sendKeys("pwd");
 		
 		
 		
